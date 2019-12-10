@@ -2,15 +2,15 @@ import json
 import config
 from requests_oauthlib import OAuth1Session
 from datetime import datetime, timezone
-
+from dateutil import parser
+from pytz import timezone
 
 CK = config.API_KEY
 CS = config.API_SECRET_KEY
 AT = config.ACCESS_TOKEN
 ATS = config.ACCESS_TOKEN_SECRET
 twitter = OAuth1Session(CK, CS, AT, ATS)
-from pytz import timezone
-from dateutil import parser
+
 url = 'https://api.twitter.com/1.1/search/tweets.json'
 keyword = 'Java　レガシー'
 
