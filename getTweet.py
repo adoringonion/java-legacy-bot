@@ -1,7 +1,7 @@
 import json
 import config
 from requests_oauthlib import OAuth1Session
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from dateutil import parser
 from pytz import timezone
 
@@ -13,6 +13,7 @@ twitter = OAuth1Session(CK, CS, AT, ATS)
 
 url = 'https://api.twitter.com/1.1/search/tweets.json'
 keyword = 'Java　レガシー'
+count = 0
 
 params = {
     'count' : 100,
@@ -28,6 +29,12 @@ if req.status_code == 200:
     for tweet in res['statuses']:
         print(datetime.now() - parser.parse(tweet['created_at']).replace(tzinfo=None))
         print("-" * 10)
+
+        if datetime.now() - parser.parse(tweet['created_at']).replace(tzinfo=None) <= timedelta(hours=1):
+            count += 1
+        
+    
+    print(count)
 
 else:
     print('Faiiled: %d' % req.status_code)
