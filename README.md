@@ -8,6 +8,8 @@ Twitter APIを利用して検索クエリを投げて、指定したワードが
 
 ツイートの取得、データベースへのアクセス、集計ツイートはAWSのLambdaを使って自動化し、データベースはDynamoDBを使用しています。
 
+<img src="https://user-images.githubusercontent.com/43922475/70678984-1723f400-1cd7-11ea-87bb-57ab4f41cd7d.png">
+
 ## ツイートの取得
 
 ## 集計結果のツイート
