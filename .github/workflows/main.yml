@@ -20,5 +20,4 @@ jobs:
           PROJECT_ID: java-legacy-bot-276612
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
         with:
-          args: functions deploy helloworld --runtime go113 --trigger-http --allow-unauthenticated
-    
+          args: info
