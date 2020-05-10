@@ -1,4 +1,0 @@
-AccessToken := os.Getenv("ACCESS_TOKEN")"1204332742592233473-VLLAJpwBwYFRnUxNyqKruC9hIhUx6C",
-		AccessTokenSecret := os.Getenv("ACCESS_TOKEN_SECRET")  "NYug91BBieMGvw3e1kKTlncroQ4HieR6rlWUH8NJuXSWs",
-		ConsumerKey := os.Getenv("CONSUMER_KEY")      "vbtvrinHC9TJQkJWLc9zTU2xC",
-		ConsumerSecret := os.Getenv("CONSUMER_SECRET")    "oRYaeKci98jP886HMQ1da6uFvCZTvpo2YbANRCBMbopSJXE4kR",
