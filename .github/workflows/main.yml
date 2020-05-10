@@ -16,6 +16,7 @@ jobs:
         targetFunction:
           - GetTweets
           - TweetCount
+          - GetChinchin
 
 
     steps:
