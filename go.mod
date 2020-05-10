@@ -1,4 +1,4 @@
-module java-legacy-bot
+module example.com/java-lecgacy-bot
 
 go 1.14
 
