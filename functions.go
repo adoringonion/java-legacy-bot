@@ -1,19 +1,20 @@
 package functions
 
 import (
-	"fmt"
-	"github.com/ChimeraCoder/anaconda"
 	"context"
+	"github.com/ChimeraCoder/anaconda"
+	"log"
 )
 
-func GetChinchin(ctx context.Context, m PubSubMessage) {
+func GetChinchin(ctx context.Context, m PubSubMessage) error {
 
 	api := connectTwitterAPI()
 	serachRes, _ := api.GetSearch(`ちんちん`, nil)
 	for _, tweet := range serachRes.Statuses {
-		fmt.Println(tweet.Text)
+		log.Println(tweet.Text)
 	}
 
+	return nil
 }
 
 func connectTwitterAPI() *anaconda.TwitterApi {
