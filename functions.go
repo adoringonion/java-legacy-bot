@@ -3,10 +3,12 @@ package functions
 import (
 	"fmt"
 	"github.com/ChimeraCoder/anaconda"
+	"context"
 )
 
-func GetChinchin() {
+func GetChinchin(ctx context.Context, m PubSubMessage) {
 
+	api := connectTwitterAPI()
 	serachRes, _ := api.GetSearch(`ちんちん`, nil)
 	for _, tweet := range serachRes.Statuses {
 		fmt.Println(tweet.Text)
@@ -14,7 +16,7 @@ func GetChinchin() {
 
 }
 
-func connectTwitterApi() *anaconda.TwitterApi {
+func connectTwitterAPI() *anaconda.TwitterApi {
 
 	twitterAccount := TwitterAccount{
 		AccessToken:       "1204332742592233473-VLLAJpwBwYFRnUxNyqKruC9hIhUx6C",
@@ -32,4 +34,8 @@ type TwitterAccount struct {
 	AccessTokenSecret string `json:"accessTokenSecret"`
 	ConsumerKey       string `json:"consumerKey"`
 	ConsumerSecret    string `json:"consumerSecret"`
+}
+
+type PubSubMessage struct {
+	Data []byte `json:"data"`
 }
