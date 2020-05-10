@@ -1,5 +1,7 @@
-# java-legacy-bot
+![](https://github.com/adoringonion/java-legacy-bot/workflows/Test/badge.svg)
+![](https://github.com/adoringonion/java-legacy-bot/workflows/Deploy%20to%20GCP/badge.svg)
 
+ # java-legacy-bot
 「Javaはレガシー」と一日で何回ツイートされたか集計して自動ツイートするbot
 
 ## 概要

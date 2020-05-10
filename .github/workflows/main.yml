@@ -1,5 +1,5 @@
 
-name: GCP
+name: Deploy to GCP
 
 on:
   push:
