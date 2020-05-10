@@ -9,12 +9,22 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        targetFunction:
+          - GetTweets
+          - TweetCount
+
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions-hub/gcloud@master
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Deploy to GCP
+        uses: actions-hub/gcloud@master
         env:
           PROJECT_ID: java-legacy-bot-276612
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+          TARGET_FUNCTION: ${{ matrix.targetFunction}}
         with:
-          args: functions deploy GetChinchin --runtime go113 --trigger-topic test
+          args: functions deploy ${TARGET_FUNCTION} --runtime go113 --trigger-topic test
