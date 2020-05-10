@@ -17,4 +17,4 @@ jobs:
           PROJECT_ID: java-legacy-bot-276612
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
         with:
-          args: functions deploy HelloHTTP --runtime go113 --trigger-http --allow-unauthenticated
+          args: functions deploy GetChinchin --runtime go113 --trigger-topic test
