@@ -4,8 +4,6 @@ name: Deploy to GCP
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   deploy:
@@ -17,7 +15,6 @@ jobs:
           - GetTweets
           - TweetCount
 
-
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -28,5 +25,10 @@ jobs:
           PROJECT_ID: java-legacy-bot-276612
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           TARGET_FUNCTION: ${{ matrix.targetFunction}}
+          ACCESS_TOKEN:  ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }} 
+          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
         with:
-          args: functions deploy ${TARGET_FUNCTION} --set-env-vars ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }},ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }},CONSUMER_KEY=${{ secrets.CONSUMER_KEY}},CONSUMER_SECRET=${{ secrets.CONSUMER_SECRET }} --runtime go113 --trigger-topic test
+          args: functions deploy ${TARGET_FUNCTION} --set-env-vars ACCESS_TOKEN=${ACCESS_TOKEN},ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET},CONSUMER_KEY=${CONSUMER_KEY},CONSUMER_SECRET=${CONSUMER_SECRET} --runtime go113 --trigger-topic test --allow-unauthenticated
+

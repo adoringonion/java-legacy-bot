@@ -4,14 +4,13 @@ import (
 	"context"
 	"log"
 	"os"
-
 	"github.com/ChimeraCoder/anaconda"
 )
 
 func GetTweets(ctx context.Context, m PubSubMessage) error {
 
 	api := ConnectTwitterAPI()
-	serachRes, _ := api.GetSearch(`ちんちん`, nil)
+	serachRes, _ := api.GetSearch(`テスト`, nil)
 	for _, tweet := range serachRes.Statuses {
 		log.Println(tweet.Text)
 	}
