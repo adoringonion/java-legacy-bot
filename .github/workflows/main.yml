@@ -13,8 +13,7 @@ jobs:
       matrix:
         targetFunction:
           - GetTweets
-          - TweetCount
-          - GetChinchin
+          - TweetCoun
 
 
     steps:
