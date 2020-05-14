@@ -31,5 +31,5 @@ jobs:
           CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
           CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
         with:
-          args: functions deploy ${TARGET_FUNCTION} --set-env-vars ACCESS_TOKEN=${ACCESS_TOKEN},ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET},CONSUMER_KEY=${CONSUMER_KEY},CONSUMER_SECRET=${CONSUMER_SECRET} --runtime go113 --trigger-topic test
+          args: functions deploy ${TARGET_FUNCTION} --set-env-vars ACCESS_TOKEN=${ACCESS_TOKEN},ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET},CONSUMER_KEY=${CONSUMER_KEY},CONSUMER_SECRET=${CONSUMER_SECRET} --runtime go113 --trigger-topic test --allow-unauthenticated
 
