@@ -2,9 +2,13 @@ package functions
 
 import (
 	"context"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
+
 	"github.com/ChimeraCoder/anaconda"
+	"github.com/dghubble/go-twitter/twitter"
 )
 
 func GetTweets(ctx context.Context, m PubSubMessage) error {
@@ -26,6 +30,15 @@ func GetTweetsCount(searchWord string) (int, error) {
 
 func ConnectTwitterAPI() *anaconda.TwitterApi {
 
+	if f, err := os.Stat("./env.json"); os.IsNotExist(err) || f.IsDir() {
+		row, err := ioutil.ReadFile("./env.json")
+		if err != nil {
+			fmt.Println(err.Error())
+			return nil
+		}
+
+		
+	}
 	AccessToken := os.Getenv("ACCESS_TOKEN")
 	AccessTokenSecret := os.Getenv("ACCESS_TOKEN_SECRET")
 	ConsumerKey := os.Getenv("CONSUMER_KEY")
