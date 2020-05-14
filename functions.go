@@ -2,9 +2,9 @@ package functions
 
 import (
 	"context"
-	"github.com/ChimeraCoder/anaconda"
 	"log"
 	"os"
+	"github.com/ChimeraCoder/anaconda"
 )
 
 func GetTweets(ctx context.Context, m PubSubMessage) error {
