@@ -4,11 +4,9 @@ import (
 	"testing"
 )
 
-func TestConnectTwitterAPI(t *testing.T) {
-}
-
 func TestGetTweetsCount(t *testing.T) {
-	result, err := GetTweetsCount("テスト")
+	result, respCode, err := GetTweetsCount("テスト")
+	t.Log("レスポンスコード:", respCode)
 	if err != nil {
 		t.Fatal("\nツイート取得失敗")
 	}

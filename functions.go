@@ -1,32 +1,22 @@
 package functions
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
 )
 
-func GetTweets(ctx context.Context, m PubSubMessage) error {
-
+func GetTweetsCount(searchWord string) (int, int, error) {
 	api := ConnectTwitterAPI()
-	serachRes, _ := api.GetSearch(`テスト`, nil)
-	for _, tweet := range serachRes.Statuses {
-		log.Println(tweet.Text)
-	}
+	search, resp, err := api.Search.Tweets(&twitter.SearchTweetParams{
+		Query: searchWord,
+	})
 
-	return nil
-}
-
-func GetTweetsCount(searchWord string) (int, error) {
-	api := ConnectTwitterAPI()
-	searchRes, err := api.GetSearch(searchWord, nil)
-	return len(searchRes.Statuses), err
+	return search.Metadata.Count, resp.StatusCode, err
 }
 
 func ConnectTwitterAPI() *twitter.Client {
@@ -42,7 +32,7 @@ func ConnectTwitterAPI() *twitter.Client {
 
 		json.Unmarshal(row, &twitterAuth)
 
-	}else {
+	} else {
 		twitterAuth = TwitterAuth{os.Getenv("ACCESS_TOKEN"), os.Getenv("ACCESS_TOKEN_SECRET"), os.Getenv("CONSUMER_KEY"), os.Getenv("CONSUMER_SECRET")}
 	}
 
@@ -60,8 +50,8 @@ type PubSubMessage struct {
 
 // TwitterAuth twitter認証用の構造体
 type TwitterAuth struct {
-	AccessToken string
+	AccessToken       string
 	AccessTokenSecret string
-	ConsumerKey string
-	ConsumerSecret string
+	ConsumerKey       string
+	ConsumerSecret    string
 }
