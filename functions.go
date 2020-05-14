@@ -2,13 +2,14 @@ package functions
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 
-	"github.com/ChimeraCoder/anaconda"
 	"github.com/dghubble/go-twitter/twitter"
+	"github.com/dghubble/oauth1"
 )
 
 func GetTweets(ctx context.Context, m PubSubMessage) error {
@@ -28,7 +29,9 @@ func GetTweetsCount(searchWord string) (int, error) {
 	return len(searchRes.Statuses), err
 }
 
-func ConnectTwitterAPI() *anaconda.TwitterApi {
+func ConnectTwitterAPI() *twitter.Client {
+
+	var twitterAuth TwitterAuth
 
 	if f, err := os.Stat("./env.json"); os.IsNotExist(err) || f.IsDir() {
 		row, err := ioutil.ReadFile("./env.json")
@@ -37,17 +40,28 @@ func ConnectTwitterAPI() *anaconda.TwitterApi {
 			return nil
 		}
 
-		
+		json.Unmarshal(row, &twitterAuth)
+
+	}else {
+		twitterAuth = TwitterAuth{os.Getenv("ACCESS_TOKEN"), os.Getenv("ACCESS_TOKEN_SECRET"), os.Getenv("CONSUMER_KEY"), os.Getenv("CONSUMER_SECRET")}
 	}
-	AccessToken := os.Getenv("ACCESS_TOKEN")
-	AccessTokenSecret := os.Getenv("ACCESS_TOKEN_SECRET")
-	ConsumerKey := os.Getenv("CONSUMER_KEY")
-	ConsumerSecret := os.Getenv("CONSUMER_SECRET")
 
-	return anaconda.NewTwitterApiWithCredentials(AccessToken, AccessTokenSecret, ConsumerKey, ConsumerSecret)
+	config := oauth1.NewConfig(twitterAuth.ConsumerKey, twitterAuth.ConsumerSecret)
+	token := oauth1.NewToken(twitterAuth.AccessToken, twitterAuth.AccessTokenSecret)
+	httpClient := config.Client(oauth1.NoContext, token)
+	client := twitter.NewClient(httpClient)
 
+	return client
 }
 
 type PubSubMessage struct {
 	Data []byte `json:"data"`
+}
+
+// TwitterAuth twitter認証用の構造体
+type TwitterAuth struct {
+	AccessToken string
+	AccessTokenSecret string
+	ConsumerKey string
+	ConsumerSecret string
 }
