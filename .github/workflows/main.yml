@@ -16,7 +16,6 @@ jobs:
         targetFunction:
           - GetTweets
           - TweetCount
-          - GetChinchin
 
 
     steps:
@@ -30,9 +29,4 @@ jobs:
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           TARGET_FUNCTION: ${{ matrix.targetFunction}}
         with:
-          args: functions deploy ${TARGET_FUNCTION} \
-          --set-env-vars ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}, \
-          ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}, \
-          CONSUMER_KEY=${{ secrets.CONSUMER_KEY}}, \
-          CONSUMER_SECRET=${{ secrets.CONSUMER_SECRET }} \
-          --runtime go113 --trigger-topic test
+          args: functions deploy ${TARGET_FUNCTION} --set-env-vars ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }},ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }},CONSUMER_KEY=${{ secrets.CONSUMER_KEY}},CONSUMER_SECRET=${{ secrets.CONSUMER_SECRET }} --runtime go113 --trigger-topic test

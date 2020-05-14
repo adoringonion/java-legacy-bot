@@ -2,12 +2,13 @@ package functions
 
 import (
 	"context"
-	"github.com/ChimeraCoder/anaconda"
 	"log"
 	"os"
+
+	"github.com/ChimeraCoder/anaconda"
 )
 
-func GetChinchin(ctx context.Context, m PubSubMessage) error {
+func GetTweets(ctx context.Context, m PubSubMessage) error {
 
 	api := ConnectTwitterAPI()
 	serachRes, _ := api.GetSearch(`ちんちん`, nil)
